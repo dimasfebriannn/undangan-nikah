@@ -94,18 +94,18 @@ function GuestDetailModal({
 
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      className="fixed inset-0 z-50 flex items-end justify-center p-0 sm:items-center sm:p-4"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
       <motion.div
-        className="relative w-full max-w-md overflow-hidden rounded-2xl"
-        style={{ background: 'var(--color-bg)', border: '1px solid var(--color-border)' }}
-        initial={{ scale: 0.95, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.95, opacity: 0 }}
+        className="relative w-full max-w-md overflow-hidden rounded-t-2xl sm:rounded-2xl"
+        style={{ background: 'var(--color-bg)', border: '1px solid var(--color-border)', maxHeight: '85vh' }}
+        initial={{ y: 50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: 50, opacity: 0 }}
       >
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4" style={{ borderBottom: '1px solid var(--color-border)' }}>
@@ -115,7 +115,7 @@ function GuestDetailModal({
           </button>
         </div>
 
-        <div className="px-5 py-4 space-y-4">
+        <div className="overflow-y-auto px-5 py-4 space-y-4" style={{ maxHeight: 'calc(85vh - 60px)' }}>
           {/* Name Edit */}
           <div>
             <label className="mb-1 block text-[10px] uppercase tracking-wider" style={{ color: 'var(--color-text-muted)' }}>Nama</label>
@@ -367,41 +367,41 @@ export function AdminPage() {
   })
 
   return (
-    <div className="min-h-screen px-4 py-8" style={{ background: 'var(--color-bg)' }}>
+    <div className="min-h-screen px-3 py-6 sm:px-4 sm:py-8" style={{ background: 'var(--color-bg)' }}>
       <div className="mx-auto max-w-2xl">
         {/* Header */}
-        <div className="mb-8 text-center">
+        <div className="mb-6 text-center sm:mb-8">
           <h1
-            className="text-3xl font-light tracking-wide"
+            className="text-2xl font-light tracking-wide sm:text-3xl"
             style={{ fontFamily: 'var(--font-display)', color: 'var(--color-text)' }}
           >
             Admin — {COUPLE_NAMES}
           </h1>
-          <p className="mt-1 text-sm" style={{ color: 'var(--color-text-muted)' }}>
+          <p className="mt-1 text-xs sm:text-sm" style={{ color: 'var(--color-text-muted)' }}>
             Kelola tamu undangan & RSVP
           </p>
         </div>
 
         {/* RSVP Summary */}
         <div
-          className="mb-6 rounded-2xl p-5"
+          className="mb-4 rounded-2xl p-3 sm:mb-6 sm:p-5"
           style={{ background: '#fff', border: '1px solid var(--color-border)' }}
         >
-          <p className="mb-3 text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--color-text-muted)' }}>
+          <p className="mb-2 text-[10px] font-medium uppercase tracking-wider sm:mb-3 sm:text-xs" style={{ color: 'var(--color-text-muted)' }}>
             Ringkasan RSVP
           </p>
 
           {/* Stats cards */}
-          <div className="mb-4 grid grid-cols-4 gap-2">
+          <div className="mb-3 grid grid-cols-2 gap-2 sm:mb-4 sm:grid-cols-4">
             {[
               { label: 'Total', value: stats.total, color: 'var(--color-text)', bg: 'var(--color-bg)' },
               { label: 'Hadir', value: stats.yes, color: '#8B9E79', bg: 'rgba(139,158,121,0.08)' },
               { label: 'Tidak', value: stats.no, color: '#C2714F', bg: 'rgba(194,113,79,0.06)' },
               { label: 'Pending', value: stats.pending, color: '#C4996B', bg: 'rgba(196,153,107,0.08)' },
             ].map((s) => (
-              <div key={s.label} className="rounded-xl p-3 text-center" style={{ background: s.bg }}>
-                <p className="text-xl font-semibold" style={{ color: s.color }}>{s.value}</p>
-                <p className="text-[10px] uppercase tracking-wider" style={{ color: 'var(--color-text-muted)' }}>{s.label}</p>
+              <div key={s.label} className="rounded-xl p-2.5 text-center sm:p-3" style={{ background: s.bg }}>
+                <p className="text-lg font-semibold sm:text-xl" style={{ color: s.color }}>{s.value}</p>
+                <p className="text-[9px] uppercase tracking-wider sm:text-[10px]" style={{ color: 'var(--color-text-muted)' }}>{s.label}</p>
               </div>
             ))}
           </div>
@@ -437,18 +437,18 @@ export function AdminPage() {
         </div>
 
         {/* Add Single */}
-        <div className="mb-4 rounded-2xl p-4" style={{ background: '#fff', border: '1px solid var(--color-border)' }}>
-          <p className="mb-3 text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--color-text-muted)' }}>
+        <div className="mb-3 rounded-2xl p-3 sm:mb-4 sm:p-4" style={{ background: '#fff', border: '1px solid var(--color-border)' }}>
+          <p className="mb-2 text-[10px] font-medium uppercase tracking-wider sm:mb-3 sm:text-xs" style={{ color: 'var(--color-text-muted)' }}>
             Tambah Tamu
           </p>
-          <div className="flex gap-2">
+          <div className="flex flex-col gap-2 sm:flex-row">
             <input
               type="text"
               value={newName}
               onChange={(e) => setNewName(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleAdd()}
               placeholder="Nama lengkap tamu..."
-              className="flex-1 rounded-xl px-4 py-2.5 text-sm outline-none transition-all"
+              className="w-full flex-1 rounded-xl px-3 py-2.5 text-sm outline-none transition-all sm:px-4"
               style={{
                 background: 'var(--color-bg)',
                 border: '1px solid var(--color-border)',
@@ -458,7 +458,7 @@ export function AdminPage() {
             <button
               onClick={handleAdd}
               disabled={isAdding || !newName.trim()}
-              className="flex items-center gap-1.5 rounded-xl px-4 py-2.5 text-sm font-medium text-white transition-all disabled:opacity-50"
+              className="flex w-full items-center justify-center gap-1.5 rounded-xl px-4 py-2.5 text-sm font-medium text-white transition-all disabled:opacity-50 sm:w-auto"
               style={{ background: 'var(--color-accent)' }}
             >
               <Plus size={14} />
@@ -547,49 +547,47 @@ export function AdminPage() {
 
         {/* Search + Filter + Actions */}
         {guests.length > 0 && (
-          <div className="mb-4 space-y-3">
-            <div className="flex gap-2">
-              <input
-                type="text"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Cari nama..."
-                className="flex-1 rounded-xl px-4 py-2 text-sm outline-none"
-                style={{
-                  background: '#fff',
-                  border: '1px solid var(--color-border)',
-                  color: 'var(--color-text)',
-                }}
-              />
-              <div className="flex gap-1">
-                {[
-                  { value: 'all', label: 'Semua' },
-                  { value: 'yes', label: 'Hadir' },
-                  { value: 'no', label: 'Tidak' },
-                  { value: 'pending', label: 'Pending' },
-                ].map((f) => (
-                  <button
-                    key={f.value}
-                    onClick={() => setFilterStatus(f.value)}
-                    className="rounded-lg px-2 py-1.5 text-[10px] font-medium transition-all"
-                    style={{
-                      background: filterStatus === f.value ? 'var(--color-accent)' : 'rgba(194,113,79,0.06)',
-                      color: filterStatus === f.value ? '#fff' : 'var(--color-text-muted)',
-                    }}
-                  >
-                    {f.label}
-                  </button>
-                ))}
-              </div>
+          <div className="mb-3 space-y-2 sm:mb-4 sm:space-y-3">
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Cari nama..."
+              className="w-full rounded-xl px-3 py-2 text-sm outline-none sm:px-4"
+              style={{
+                background: '#fff',
+                border: '1px solid var(--color-border)',
+                color: 'var(--color-text)',
+              }}
+            />
+            <div className="flex flex-wrap gap-1.5 sm:gap-1">
+              {[
+                { value: 'all', label: 'Semua' },
+                { value: 'yes', label: 'Hadir' },
+                { value: 'no', label: 'Tidak' },
+                { value: 'pending', label: 'Pending' },
+              ].map((f) => (
+                <button
+                  key={f.value}
+                  onClick={() => setFilterStatus(f.value)}
+                  className="rounded-lg px-3 py-1.5 text-[10px] font-medium transition-all sm:px-2"
+                  style={{
+                    background: filterStatus === f.value ? 'var(--color-accent)' : 'rgba(194,113,79,0.06)',
+                    color: filterStatus === f.value ? '#fff' : 'var(--color-text-muted)',
+                  }}
+                >
+                  {f.label}
+                </button>
+              ))}
             </div>
-            <div className="flex items-center justify-between">
-              <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-[10px] sm:text-xs" style={{ color: 'var(--color-text-muted)' }}>
                 {filteredGuests.length} dari {total} tamu
               </p>
               <div className="flex gap-2">
                 <button
                   onClick={copyAllLinks}
-                  className="flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-medium transition-all"
+                  className="flex flex-1 items-center justify-center gap-1.5 rounded-xl px-3 py-2 text-[10px] font-medium transition-all sm:flex-none sm:text-xs"
                   style={{ background: 'rgba(194,113,79,0.08)', color: 'var(--color-accent)', border: '1px solid rgba(194,113,79,0.12)' }}
                 >
                   <Copy size={12} />
@@ -597,7 +595,7 @@ export function AdminPage() {
                 </button>
                 <button
                   onClick={downloadCSV}
-                  className="flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-medium transition-all"
+                  className="flex flex-1 items-center justify-center gap-1.5 rounded-xl px-3 py-2 text-[10px] font-medium transition-all sm:flex-none sm:text-xs"
                   style={{ background: 'rgba(139,158,121,0.08)', color: 'var(--color-accent-2)', border: '1px solid rgba(139,158,121,0.12)' }}
                 >
                   <Download size={12} />
@@ -621,37 +619,37 @@ export function AdminPage() {
             </p>
           </div>
         ) : (
-          <div className="space-y-2">
+          <div className="space-y-1.5 sm:space-y-2">
             {filteredGuests.map((guest) => (
               <motion.div
                 key={guest.id}
                 layout
-                className="group flex items-center justify-between gap-3 rounded-xl px-4 py-3 transition-all"
+                className="group flex items-center justify-between gap-2 rounded-xl px-3 py-2.5 transition-all sm:gap-3 sm:px-4 sm:py-3"
                 style={{ background: '#fff', border: '1px solid var(--color-border)', cursor: 'pointer' }}
                 whileHover={{ boxShadow: '0 2px 8px rgba(58,42,30,0.06)' }}
                 onClick={() => setDetailGuest(guest)}
               >
                 <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-2">
-                    <p className="truncate text-sm font-medium" style={{ color: 'var(--color-text)' }}>
+                  <div className="flex flex-wrap items-center gap-1 sm:gap-2">
+                    <p className="truncate text-xs font-medium sm:text-sm" style={{ color: 'var(--color-text)' }}>
                       {guest.name}
                     </p>
                     <StatusBadge status={guest.attending} />
                   </div>
                   {guest.message && (
-                    <p className="mt-0.5 truncate text-[11px]" style={{ color: 'var(--color-text-muted)' }}>
+                    <p className="mt-0.5 truncate text-[10px] sm:text-[11px]" style={{ color: 'var(--color-text-muted)' }}>
                       "{guest.message}"
                     </p>
                   )}
                 </div>
                 <div
-                  className="flex items-center gap-1.5 shrink-0"
+                  className="flex shrink-0 items-center gap-1 sm:gap-1.5"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <CopyButton text={getInviteUrl(guest.name)} label="Link" />
                   <button
                     onClick={() => handleDelete(guest.id, guest.name)}
-                    className="rounded-lg p-1.5 text-[var(--color-text-muted)] opacity-30 transition-all hover:opacity-100 hover:text-red-500"
+                    className="rounded-lg p-1 text-[var(--color-text-muted)] opacity-30 transition-all hover:opacity-100 hover:text-red-500 sm:p-1.5"
                   >
                     <Trash2 size={12} />
                   </button>
