@@ -19,7 +19,7 @@ export function CoverPage() {
     audioRef.current = audio
     audio.play().then(() => {
       let vol = 0
-      const target = 0.3
+      const target = 0.5
       const step = target / 30
       const id = setInterval(() => {
         vol += step
