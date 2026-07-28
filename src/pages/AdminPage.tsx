@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { api } from '../lib/api'
 import type { Guest } from '../types'
-import { Copy, Check, Trash2, Plus, Users, Link2, Download, MessageCircle, X, ChevronDown, ChevronUp, Send, Eye } from 'lucide-react'
+import { Copy, Check, Trash2, Plus, Users, Download, MessageCircle, X, ChevronDown, ChevronUp, Send } from 'lucide-react'
 
 const SLUG = 'galih-maesya'
 const COUPLE_NAMES = 'Galih & Maesya'
