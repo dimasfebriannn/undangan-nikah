@@ -5,7 +5,7 @@ import { drizzle } from 'drizzle-orm/postgres-js'
 import postgres from 'postgres'
 import { eq, like, desc, and } from 'drizzle-orm'
 import { z } from 'zod'
-import { invitations, guests, wishes, rsvpLogs } from '../src/db/schema'
+import { invitations, guests, wishes, rsvpLogs } from './db/schema'
 
 const connectionString = process.env.DATABASE_URL!
 const client = postgres(connectionString)
