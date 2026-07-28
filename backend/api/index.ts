@@ -75,7 +75,12 @@ const app = new Hono()
 
 app.use('*', logger())
 app.use('*', cors({
-  origin: process.env.CORS_ORIGIN || '*',
+  origin: (origin) => {
+    const allowed = (process.env.CORS_ORIGIN || '*').split(',').map(s => s.trim())
+    if (allowed.includes('*')) return '*'
+    if (origin && allowed.includes(origin)) return origin
+    return allowed[0] || '*'
+  },
   allowMethods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowHeaders: ['Content-Type', 'Authorization'],
 }))
