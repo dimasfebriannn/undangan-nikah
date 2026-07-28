@@ -20,7 +20,7 @@ export function EnvelopeAnimation({ guestName, onOpen }: EnvelopeAnimationProps)
     onOpen?.()
     const params = searchParams.toString()
     setTimeout(() => {
-      navigate(`/undangan${params ? `?${params}` : ''}`)
+      navigate(`/undangan${params ? `?${params}&opened=1` : '?opened=1'}`)
     }, 2200)
   }
 

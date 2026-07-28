@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef, Suspense, lazy } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { motion, AnimatePresence } from 'motion/react'
 import { Helmet } from 'react-helmet-async'
 import { useSmoothScroll } from '../hooks/useSmoothScroll'
@@ -22,8 +23,9 @@ const VenueMaps = lazy(() => import('../components/maps/VenueMaps').then(m => ({
 
 export function InvitationPage() {
   useSmoothScroll()
+  const [searchParams] = useSearchParams()
   const slug = 'galih-maesya'
-  const [coverDone, setCoverDone] = useState(false)
+  const [coverDone, setCoverDone] = useState(() => searchParams.get('opened') === '1')
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
   const playMusic = useCallback(() => {
