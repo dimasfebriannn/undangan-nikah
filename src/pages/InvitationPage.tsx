@@ -34,9 +34,9 @@ export function InvitationPage() {
     audio.loop = true
     audio.volume = 0
     audioRef.current = audio
-    audio.addEventListener('loadedmetadata', () => { audio.currentTime = 10 }, { once: true })
+    audio.addEventListener('loadedmetadata', () => { audio.currentTime = 19 }, { once: true })
     audio.play().then(() => {
-      audio.currentTime = 10
+      audio.currentTime = 19
       let vol = 0
       const target = 1
       const step = target / 30
